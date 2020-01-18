@@ -2,28 +2,29 @@ def stepCalc(value, cycle):
 	return value / (cycle / 2)
 
 def colorMaxInit(maxColor, maxBright):
-	(maxBright/255) * maxColor
+	return (maxBright/255) * maxColor
 
 class ledInfo():
 
 	#maxcolor is the most saturated pixel will get
 	#color is the current color state of a pixel
 	#both = (red, green, blue, brightness)
-	def __init__(self, pos, maxcolor = (0,0,0,0.0), onOffCycle = 0, on = 0):
+	def __init__(self, pos, maxcolor = [0,0,0,0.0], onOffCycle = 0, on = 0):
 		self.pos = pos
 		self.maxcolor = maxcolor
-		self.color = (0,0,0,0.0)
+		self.color = [0,0,0,0.0]
 		self.onOffCycle = onOffCycle + 1 #prevent /0
-		self.step = (0.0,0.0,0.0,0.0)
+		self.step = [0.0,0.0,0.0,0.0]
 		self.on = on
 		self.midway = 0
 		if self.maxcolor[0] == self.maxcolor[1] == self.maxcolor[2] == 0:
 			self.maxcolor[0] = self.maxcolor[1] = self.maxcolor[2] = self.maxcolor[3]
 		else:
-			for i in range(2):
-				self.maxcolor[i] = colorMaxInit(self.maxcolor[i], self.maxcolor[3]
-		for i in range(3):
-			self.step[i] = stepCalc(self.color[i],self.onOffCycle)
+			for i in range(3):
+				print(f'{i} {self.maxcolor}')
+				self.maxcolor[i] = colorMaxInit(self.maxcolor[i], self.maxcolor[3])
+		for i in range(4):
+			self.step[i] = stepCalc(self.color[i], self.onOffCycle)
 		
 	def lightFade(self):
 		if self.midway == 0 and self.color[3] >= self.maxcolor[3]:
@@ -52,7 +53,7 @@ class ledInfo():
 			self.maxcolor[0] = self.maxcolor[1] = self.maxcolor[2] = self.maxcolor[3]
 		else:
 			for i in range(2):
-				self.maxcolor[i] = colorMaxInit(self.maxcolor[i], self.maxcolor[3]
+				self.maxcolor[i] = colorMaxInit(self.maxcolor[i], self.maxcolor[3])
 		for i in range(3):
 			self.step[i] = stepCalc(self.color[i],self.onOffCycle)
 		self.midway = 0

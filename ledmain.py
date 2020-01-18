@@ -3,7 +3,7 @@ import neopixel
 from ledprocesses import lightpatterns as lp
 
 
-twinkles = 5000
+twinkles = 500
 maxOn = 100
 pin = board.D18
 pixels = 150
@@ -14,9 +14,12 @@ faster = .001
 red = (255,0,0,255)
 green = (0,255,0,255)
 blue = (0,0,255,255)
-colorSet = (150,200,0,0)
+colorSet = [150,200,0,255]
+#pixelstrip = list()
+#for i in range(pixels):
+#	pixelstrip.append(i)
 
-if __name__ = '__main__':
+if __name__ == '__main__':
 	while True:		
 		lp.blackout(pixelstrip, pixels)
 		lp.colorFill(pixelstrip, pixels, blue)

@@ -41,17 +41,17 @@ def randColor(maxBright = 255):
 	c = 0
 
 	if cycle == 0:
-		return (a,b,c,maxBright)
+		return [a,b,c,maxBright]
 	elif cycle == 1:
-		return (a,c,b,maxBright)
+		return [a,c,b,maxBright]
 	elif cycle == 2:
-		return (b,a,c,maxBright)
+		return [b,a,c,maxBright]
 	elif cycle == 3:
-		return (b,c,a,maxBright)
+		return [b,c,a,maxBright]
 	elif cycle == 4:
-		return (c,a,b,maxBright)
+		return [c,a,b,maxBright]
 	else:
-		return (c,b,a,maxBright)
+		return [c,b,a,maxBright]
 
 def onOffCheck(numOn, maxOnA, maxOnB, turnOnOffState):
 	if turnOnOffState == 1:
@@ -87,6 +87,6 @@ def pixelsToTurnOn(turnOnOffState):
 
 def colorType(color):
 	#determines if a specific color is selected or it will be random
-	if color <> (0,0,0,0.0):
+	if color != (0,0,0,0.0):
 		return 1
 	return 0

@@ -1,6 +1,6 @@
 import time
-import ledclass as lc
-import lightpatternfunctions as lpf
+from . import ledclass as lc
+from . import lightpatternfunctions as lpf
 from random import randint
 
 def blackout(pixelstrip, pixels, wait = 1):
@@ -8,16 +8,19 @@ def blackout(pixelstrip, pixels, wait = 1):
 	for i in range(pixels):
 		pixelstrip[i] = color
 	pixelstrip.show()
+	#print(pixelstrip)
 	time.sleep(wait)
 
 def colorFill(pixelstrip, pixels, color):
 	for i in range(pixels):
 		pixelstrip[i] = color
 	pixelstrip.show()
-
+	#print(pixelstrip)
+	
 def colorSlowFill(pixelstrip, pixels, color, wait):
 	for i in range(pixels):
 		pixelstrip[i] = color
+		#print(pixelstrip)
 		pixelstrip.show()
 		time.sleep(wait)
 
@@ -25,10 +28,11 @@ def colorSlowFill(pixelstrip, pixels, color, wait):
 #style 2 rainbow across pixels that cycles
 #method 1 fades across all pixels at once
 #method 2 uniformly distributes across all pixels
-def rainbowCycle(pixelsstrip, pixels, wait, iter = 1, order = 1, method = 1, style = 1, indexType = 1):
+def rainbowCycle(pixelstrip, pixels, wait, iter = 1, order = 1, method = 1, style = 1, indexType = 1):
 	for j in range(256 * iter -1):
 		if style == 1:
-			pixelstrip.fill(lpf.wheel(j & 255, order))
+			for i in range(pixels):
+				pixelstrip[i] = lpf.wheel(j & 255, order)
 		else:
 			for i in range(pixels):
 				if indexType > 1:
@@ -41,6 +45,7 @@ def rainbowCycle(pixelsstrip, pixels, wait, iter = 1, order = 1, method = 1, sty
 					color_index = index + j
 				pixelstrip[index] = lpf.wheel(color_index & 255, order)
 		pixelstrip.show()
+		#print(pixelstrip)
 		time.sleep(wait)
 
 def theaterChase(pixelstrip, pixels, color, wait, iter = 10):
@@ -48,6 +53,7 @@ def theaterChase(pixelstrip, pixels, color, wait, iter = 10):
 		for q in range(3):
 			for i in range(0, pixels, 3):
 				pixelstrip[i + q] = (color[0], color[1], color[2])
+			#print(pixelstrip)
 			pixelstrip.show()
 			time.sleep(wait)
 			for i in range(0, pixels, 3):
@@ -62,6 +68,7 @@ def theaterChaseRainbow(pixelstrip, pixels, wait, iter = 1, order = 1, method = 
 				else:
 					color_index = i + j
 				pixelstrip[i + q] = lpf.wheel(color_index & 255, order)
+			#print(pixelstrip)
 			pixelstrip.show()
 			time.sleep(wait)
 			for i in range(0, pixels, 3):
@@ -105,6 +112,7 @@ def twinkle(pixelstrip, pixels, wait, twinkles = 1000, maxOn = 35, maxColor = (0
 				x.lightFade()
 				#populates my object parameters to the neopixel object (I know there is probably a better way, but I'm not to that point yet.) 
 				pixelstrip[x.pos] = (int(x.color[0]), int(x.color[1]), int(x.color[2]))
+		#print(pixelstrip)
 		pixelstrip.show()
 		time.sleep(wait)
 		#controlls if lights will be turned on or off
